@@ -1,5 +1,8 @@
 package leveldb4j.db.options;
 
-public class WriteOptions extends Options {
+import leveldb4j.ext.annotations.Default;
 
+public class WriteOptions {
+    @Default(type = Default.Type.BOOLEAN, value = "true")
+    static boolean SYNC;
 }
