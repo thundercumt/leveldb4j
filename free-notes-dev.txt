@@ -1,0 +1,18 @@
+how to create a reusable buffer in java
+
+some drawbacks that byte[] or java.nio.ByteBuffer have
+
+byte[] does not support basic methods required for a buffer, for instance:
+    startsWith
+    endsWith
+    compareTo
+    equals (although Arrays.equals can help)
+
+java.nio.ByteBuffer is not handy to use, it has its inner working logic exposed to its api
+
+cur capacity mark reset etc
+
+does not provide methods listed above
+
+something like memcmp in c is needed here.
+comparison to part of a buffer may also be necessary.
