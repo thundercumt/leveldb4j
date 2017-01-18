@@ -40,7 +40,7 @@ public class Slice implements Comparable<Slice> {
         return data;
     }
 
-    public int getLength() {
+    public int getSize() {
         return length;
     }
 
@@ -85,40 +85,40 @@ public class Slice implements Comparable<Slice> {
     }
 
     public int compareTo(Slice b) {
-        if (data == null || getLength() == 0)
+        if (data == null || getSize() == 0)
             throw new InvalidArgumentException();
-        if (b == null || b.data == null || b.getLength() == 0)
+        if (b == null || b.data == null || b.getSize() == 0)
             throw new InvalidArgumentException();
         if (data == b.data)
             return 0;
 
-        int minLen = Math.min(getLength(), b.getLength());
+        int minLen = Math.min(getSize(), b.getSize());
         int v = 0, i = 0;
         while (i < minLen && v == 0) {
             v = at(i) - b.at(i);
         }
 
         if (v == 0) {
-            if (getLength() > minLen)
+            if (getSize() > minLen)
                 v = 1;
-            else if (b.getLength() > minLen)
+            else if (b.getSize() > minLen)
                 v = -1;
         }
         return v;
     }
 
     public boolean startsWith(Slice b) {
-        if (data == null || getLength() == 0)
+        if (data == null || getSize() == 0)
             return false;
-        if (b == null || b.data == null || b.getLength() == 0)
+        if (b == null || b.data == null || b.getSize() == 0)
             return false;
         if (data == b.data)
             return true;
 
-        if (b.getLength() > getLength())
+        if (b.getSize() > getSize())
             return false;
 
-        for (int i = 0; i < b.getLength(); i++) {
+        for (int i = 0; i < b.getSize(); i++) {
             if (at(i) != b.at(i))
                 return false;
         }
