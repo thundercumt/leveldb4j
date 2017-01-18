@@ -16,3 +16,7 @@ does not provide methods listed above
 
 something like memcmp in c is needed here.
 comparison to part of a buffer may also be necessary.
+
+
+java is not comparable to c++ in memory efficiency, some change or rewrite may be needed.
+For example to achieve zero-copy, instead of initializing small array of bytes wrapping primitive type, I may choose to execute more assignment instructions.
