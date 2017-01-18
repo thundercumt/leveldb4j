@@ -44,8 +44,8 @@ public class DBStatusException extends LevelDB4JException {
 
     private DBStatusException(Code c, Slice msg1, Slice msg2) {
         code = c;
-        int len = (msg1 == null ? 0 : msg1.getLength())
-                + (msg2 == null ? 0 : msg2.getLength());
+        int len = (msg1 == null ? 0 : msg1.getSize())
+                + (msg2 == null ? 0 : msg2.getSize());
         StringBuilder sb = new StringBuilder(len);
         if (msg1 != null)
             sb.append(msg1);
