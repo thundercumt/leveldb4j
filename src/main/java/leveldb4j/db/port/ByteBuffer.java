@@ -1,5 +1,7 @@
 package leveldb4j.db.port;
 
+import leveldb4j.error.NotImplementedException;
+
 public class ByteBuffer implements DBBuffer {
     private static final byte[] EMPTY  = new byte[0];
     private byte[]              bytes  = EMPTY;
@@ -46,8 +48,17 @@ public class ByteBuffer implements DBBuffer {
 
     @Override
     public int capacity() {
-        // TODO Auto-generated method stub
-        return 0;
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean empty() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void append(byte[] values) {
+        throw new NotImplementedException();
     }
 
 }

@@ -12,12 +12,23 @@ public class Coding {
                 | ((int) buf.get(pos + 3) << 24);
 
     }
+
+    public static void encodeFixed32(DBBuffer buf, int pos, int value) {
+        buf.put(pos, (byte) (value & 0xff));
+        buf.put(pos + 1, (byte) ((value >> 8) & 0xff));
+        buf.put(pos + 2, (byte) ((value >> 16) & 0xff));
+        buf.put(pos + 3, (byte) ((value >> 24) & 0xff));
+    }
     
-    public static void encodeFixed32(DBBuffer buf,int value)
+    public static void encodeVarInt32(DBBuffer buf, int pos, int value) {
+        throw new IOException();
+    }
 
     public static void putFixed32(DBBuffer buffer, int value) {
-        byte[] buf = new byte[JavaDefs.BYTE_SIZE];
-        
+        encodeFixed32(buffer, buffer.length(), value);
+    }
+    
+    public static void putVarInt32(DBBuffer buffer, int value) {
         
     }
 }

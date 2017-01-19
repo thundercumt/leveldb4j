@@ -5,13 +5,14 @@ import java.nio.ByteBuffer;
 import leveldb4j.db.Comparator;
 import leveldb4j.db.Iterator;
 import leveldb4j.db.Slice;
+import leveldb4j.db.port.DBBuffer;
 import leveldb4j.db.port.JavaDefs;
 import leveldb4j.db.util.Coding;
 import leveldb4j.error.NotImplementedException;
 
 public class Block {
     private int        size;
-    private ByteBuffer data;
+    private DBBuffer data;
     int                restartOffset;
     boolean            owned;
 

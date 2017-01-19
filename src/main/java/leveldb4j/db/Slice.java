@@ -2,10 +2,10 @@ package leveldb4j.db;
 
 import java.nio.ByteBuffer;
 
+import leveldb4j.db.port.DBBuffer;
 import leveldb4j.error.InvalidArgumentException;
 import leveldb4j.error.NotImplementedException;
 import leveldb4j.ext.annotations.MayHaveProblem;
-import leveldb4j.ext.annotations.PrematureChange;
 
 public class Slice implements Comparable<Slice> {
     private static final ByteBuffer EMPTY = ByteBuffer.allocate(0);
@@ -32,15 +32,19 @@ public class Slice implements Comparable<Slice> {
         this.length = len;
     }
 
+    public Slice(DBBuffer buffer) {
+        throw new NotImplementedException();
+    }
+
     public byte[] getDataArray() {
         return data.array();
     }
-    
-    public ByteBuffer getData() {
-        return data;
+
+    public DBBuffer data() {
+        throw new NotImplementedException();
     }
 
-    public int getSize() {
+    public int size() {
         return length;
     }
 
@@ -85,40 +89,40 @@ public class Slice implements Comparable<Slice> {
     }
 
     public int compareTo(Slice b) {
-        if (data == null || getSize() == 0)
+        if (data == null || size() == 0)
             throw new InvalidArgumentException();
-        if (b == null || b.data == null || b.getSize() == 0)
+        if (b == null || b.data == null || b.size() == 0)
             throw new InvalidArgumentException();
         if (data == b.data)
             return 0;
 
-        int minLen = Math.min(getSize(), b.getSize());
+        int minLen = Math.min(size(), b.size());
         int v = 0, i = 0;
         while (i < minLen && v == 0) {
             v = at(i) - b.at(i);
         }
 
         if (v == 0) {
-            if (getSize() > minLen)
+            if (size() > minLen)
                 v = 1;
-            else if (b.getSize() > minLen)
+            else if (b.size() > minLen)
                 v = -1;
         }
         return v;
     }
 
     public boolean startsWith(Slice b) {
-        if (data == null || getSize() == 0)
+        if (data == null || size() == 0)
             return false;
-        if (b == null || b.data == null || b.getSize() == 0)
+        if (b == null || b.data == null || b.size() == 0)
             return false;
         if (data == b.data)
             return true;
 
-        if (b.getSize() > getSize())
+        if (b.size() > size())
             return false;
 
-        for (int i = 0; i < b.getSize(); i++) {
+        for (int i = 0; i < b.size(); i++) {
             if (at(i) != b.at(i))
                 return false;
         }

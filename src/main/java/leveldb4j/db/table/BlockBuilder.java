@@ -25,13 +25,31 @@ public class BlockBuilder {
     }
 
     public void add(Slice key, Slice value) {
-
+        Slice lastKeyPiece = new Slice(lastKey);
+        assert !finished;
+        assert counter <= options.BLOCK_RESTART_INTERVAL;
+        assert buffer.empty()
+                || options.COMPARATOR.compare(key, lastKeyPiece) > 0;
+        int shared = 0;
+        if (counter < options.BLOCK_RESTART_INTERVAL) {
+            int minLength = Math.min(lastKeyPiece.size(), key.size());
+            while ((shared < minLength
+                    && lastKeyPiece.at(shared) == key.at(shared))) {
+                shared++;
+            }
+        } else {
+            restarts.add(buffer.length());
+            counter = 0;
+        }
     }
 
     public Slice finish() {
-        for(int i=0; i<restarts.size(); i++) {
+        for (int i = 0; i < restarts.size(); i++) {
             Coding.putFixed32(buffer, restarts.get(i));
         }
+        Coding.putFixed32(buffer, restarts.size());
+        finished = true;
+        return new Slice(buffer);
     }
 
     int currentSizeEstimate() {
