@@ -67,4 +67,16 @@ public class ByteBuffer implements DBBuffer {
         return null;
     }
 
+    @Override
+    public void append(DBBuffer buf, int pos, int len) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void append(DBBuffer buf) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

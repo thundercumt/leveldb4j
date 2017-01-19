@@ -1,6 +1,5 @@
 package leveldb4j.db.table;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import leveldb4j.db.Slice;
@@ -41,6 +40,19 @@ public class BlockBuilder {
             restarts.add(buffer.length());
             counter = 0;
         }
+
+        int nonShared = key.size() - shared;
+
+        Coding.putVarInt32(buffer, shared);
+        Coding.putVarInt32(buffer, nonShared);
+        Coding.putVarInt32(buffer, value.size());
+
+        buffer.append(key.data(), shared, nonShared);
+        buffer.append(value.data());
+
+        lastKey = new String(key.data().internalBytes(), shared, nonShared);
+        counter++;
+
     }
 
     public Slice finish() {

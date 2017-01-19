@@ -49,6 +49,6 @@ public class Coding {
     }
 
     public static void putVarInt32(DBBuffer buffer, int value) {
-
+        encodeVarInt32(buffer, buffer.length(), value);
     }
 }
