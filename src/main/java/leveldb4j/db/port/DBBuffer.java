@@ -14,4 +14,6 @@ public interface DBBuffer {
     public boolean empty();
 
     public void append(byte[] values);
+    
+    public java.nio.ByteBuffer asNIOByteBuffer();
 }

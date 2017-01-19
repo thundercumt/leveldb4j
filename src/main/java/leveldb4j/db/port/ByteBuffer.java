@@ -61,4 +61,10 @@ public class ByteBuffer implements DBBuffer {
         throw new NotImplementedException();
     }
 
+    @Override
+    public java.nio.ByteBuffer asNIOByteBuffer() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

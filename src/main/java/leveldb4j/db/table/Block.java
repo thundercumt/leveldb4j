@@ -27,8 +27,8 @@ public class Block {
     }
 
     public Block(BlockContents contents) {
-        data = contents.data.getData();
-        size = contents.data.getSize();
+        data = contents.data.data();
+        size = contents.data.size();
         owned = contents.heapAllocated;
 
         if (size < JavaDefs.INT_SIZE) {

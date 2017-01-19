@@ -14,7 +14,7 @@ public class WritableFile extends NIOFileAccess {
     public void append(Slice data) {
         try {
             fileChannel().position(fileChannel().size());
-            fileChannel().write(data.getData());
+            fileChannel().write(data.data().asNIOByteBuffer());
         } catch (IOException e) {
             throw DBStatusException.ioError(e.getMessage(), "");
         }
