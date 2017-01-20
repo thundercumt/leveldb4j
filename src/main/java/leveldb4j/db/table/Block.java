@@ -1,7 +1,5 @@
 package leveldb4j.db.table;
 
-import java.nio.ByteBuffer;
-
 import leveldb4j.db.Comparator;
 import leveldb4j.db.Iterator;
 import leveldb4j.db.Slice;
