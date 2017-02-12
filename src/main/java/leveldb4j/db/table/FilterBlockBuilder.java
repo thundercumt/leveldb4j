@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import leveldb4j.db.FilterPolicy;
 import leveldb4j.db.Slice;
+import leveldb4j.error.NotImplementedException;
 
 public class FilterBlockBuilder {
     private static final int   kFilterBaseLg = 11;
@@ -37,9 +38,7 @@ public class FilterBlockBuilder {
         }
 
         start.add(keys.length());
-        
-        
-        tmpKeys.size
+        throw new NotImplementedException();
     }
 
     public void addKey(Slice key) {
@@ -47,7 +46,7 @@ public class FilterBlockBuilder {
     }
 
     public Slice finish() {
-
+        throw new NotImplementedException();
     }
 
 }
