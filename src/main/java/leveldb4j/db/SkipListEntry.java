@@ -60,6 +60,11 @@ public class SkipListEntry<K extends Comparable<K>, V> {
         return new SkipListEntry<>(key, value);
     }
 
+    @Override
+    public String toString() {
+        return "[" + key + " " + value + "]";
+    }
+
     static final class NegativeInfEntry<K extends Comparable<K>, V>
             extends SkipListEntry<K, V> {
         boolean keyEquals(SkipListEntry<K, V> n) {
@@ -85,6 +90,11 @@ public class SkipListEntry<K extends Comparable<K>, V> {
         @Override
         protected SkipListEntry<K, V> clone() {
             return new NegativeInfEntry<>();
+        }
+
+        @Override
+        public String toString() {
+            return "[NegInf null]";
         }
     }
 
@@ -113,6 +123,11 @@ public class SkipListEntry<K extends Comparable<K>, V> {
         @Override
         protected SkipListEntry<K, V> clone() {
             return new PositiveInfEntry<>();
+        }
+
+        @Override
+        public String toString() {
+            return "[PosInf null]";
         }
 
     }

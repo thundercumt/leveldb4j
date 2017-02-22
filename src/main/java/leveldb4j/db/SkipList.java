@@ -1,5 +1,7 @@
 package leveldb4j.db;
 
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -103,5 +105,37 @@ public class SkipList<K extends Comparable<K>, V> {
         topRight.below = this.topRight;
         this.topRight = topRight;
     }
+    
+    @Override
+    public String toString() {
+        Deque<SkipListEntry<K, V>> deque = new LinkedList<>();
+        StringBuilder sb = new StringBuilder();
+        
+        SkipListEntry<K,V> e = this.topLeft;
+        deque.addFirst(e);
+        while(e.below != null) {
+            e = e.below;
+            deque.addFirst(e);
+        } 
+        while(deque.peek() != null) {
+            sb.append(deque.poll());
+            sb.append(", ");
+        }
+        sb.append(System.lineSeparator());
 
+        e = e.next;
+        while(e != null) {
+            while(e != null) {
+                deque.addLast(e);
+                e = e.above;
+            }
+            e = deque.peek().next;//points to the next bottom entry
+            while(deque.peek() != null) {
+                sb.append(deque.poll());
+                sb.append(", ");
+            }
+            sb.append(System.lineSeparator());
+        }
+        return sb.toString();
+    }
 }
